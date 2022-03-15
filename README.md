@@ -14,7 +14,7 @@ This algorithm generates a dungeon (game world) on a matrix containing instances
 &nbsp;&nbsp;&nbsp;_instantiate the matrix, worldMap, which will be returned_ <br />
 &nbsp;&nbsp;&nbsp;_place a room, origin, in the matrix_ <br />
 &nbsp;&nbsp;&nbsp;_pathify(origin)_ <br />
-&nbsp;&nbsp;&nbsp;_return worldMap_
+&nbsp;&nbsp;&nbsp;_return worldMap_ <br />
 
 **_pathify(Object room)_** <br />
 &nbsp;&nbsp;&nbsp;_for each door in this room_ <br />
