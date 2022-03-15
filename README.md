@@ -38,7 +38,7 @@ This algorithm generates a dungeon (game world) on a matrix containing instances
 **_pathify(Object room, Matrix worldMap)_** <br />
 &nbsp;&nbsp;&nbsp;_for each door in this room_ <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_generate a percentage x between 0 and 100_ <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_if x >= 50_ <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_if x >= 50%_ <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_set this door to true to open it_ <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_if the adjacent spot in that direction on worldMap does NOT have a room_ <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_place a room, newRoom, on that index of the matrix_ <br />
