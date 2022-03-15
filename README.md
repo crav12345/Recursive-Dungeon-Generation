@@ -12,6 +12,9 @@ The documentation of this repository, however, will exclusively discuss dungeon 
 
 ## Visualized Example
 ![Christopher Ravosa's Recursive Dungeon Generation algorithm visualized in a gif](https://piskel-imgstore-b.appspot.com/img/26852594-a49e-11ec-bfc6-3d5395cde8f1.gif)
+<p align="center">
+  <img src="https://piskel-imgstore-b.appspot.com/img/26852594-a49e-11ec-bfc6-3d5395cde8f1.gif" alt="Christopher Ravosa's Recursive Dungeon Generation algorithm visualized in a gif" />
+</p>
 
 ## Pseudocode
 The algorithm makes use of a _Room_ class. _Room_ defines an object containing an array of four (4) booleans. Each boolean represents one (1) of the four (4) doors which may exist on each of the walls of a standard room. Each index of the _doors_ array must be associated with one of the cardinal directions. For example, 0 -> North, 1 -> East, 2 -> South, 3 -> West. If a boolean in the _doors_ array is _true_, that means the associated door exists and attaches this instance of _Room_ to another instance of _Room_ in the direction associated with that index of the _doors_ array.
