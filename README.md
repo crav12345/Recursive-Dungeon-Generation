@@ -29,7 +29,7 @@ The algorithm makes use of a _Room_ class. _Room_ defines an object containing a
 
 This algorithm generates a dungeon (game world) on a matrix containing instances of the _Room_ class. The matrix can be characterized by the dimensions _n x m_, where _n_ is row length and _m_ is column length. This algorithm works on both square matrices and matrices where row and column lengths differ. Included below is a pseudocode representation of this algorithm before any modifications have been made for generating more diverse dungeons.
 
-**_GenerateDungeon(Int n, Int m)_** <br />
+**_generateDungeon(Int n, Int m)_** <br />
 &nbsp;&nbsp;&nbsp;_instantiate the matrix, worldMap, which will be returned_ <br />
 &nbsp;&nbsp;&nbsp;_place a room, origin, in the matrix_ <br />
 &nbsp;&nbsp;&nbsp;_pathify(origin)_ <br />
