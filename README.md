@@ -37,3 +37,8 @@ This algorithm generates a dungeon (game world) on a matrix containing instances
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_if the adjacent spot in that direction on worldMap does NOT have a room_ <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_place a room, newRoom, on that index of the matrix_ <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_pathify(newRoom)_ <br />
+
+## Acknowledgements
+This list contains links to resources which were helpful in the development of this project:
+
+* [Piskel](https://www.piskelapp.com/): Used to create algorithm visualization
