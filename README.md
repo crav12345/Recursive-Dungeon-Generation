@@ -11,6 +11,7 @@ There are many modifications which can be made to this algorithm. For example, t
 The documentation of this repository, however, will exclusively discuss dungeon generation using this algorithm on a two-dimensional matrix. Check back in the future to see implementations of this algorithm in different languages and with different modifications.
 
 ## Visualized Example
+
 <p align="center">
   <img
        src="https://piskel-imgstore-b.appspot.com/img/26852594-a49e-11ec-bfc6-3d5395cde8f1.gif"
