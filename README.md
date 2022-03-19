@@ -2,10 +2,15 @@
 This repository contains implementations of a recursive algorithm, authored by Christopher Ravosa, for generating dungeons on a matrix. The general idea with this algorithm is that a dungeon is created by snaking paths out of a starting room known as the "origin" of the dungeon. For a more detailed overview of the algorithm, see the below sections.
 
 ### Table of Contents
+**[Quick Links to Implementations](#quick-links-to-implementations)**<br>
 **[Algorithm Summary](#algorithm-summary)**<br>
 **[Visualized Example](#visualized-example)**<br>
 **[Pseudocode](#pseudocode)**<br>
 **[Acknowledgements](#acknowledgements)**<br>
+
+## Quick Links to Implementations
+* [Kotlin](https://github.com/crav12345/Recursive-Dungeon-Generation/blob/main/Kotlin/RecursiveDungeonGeneration/src/main/kotlin/Main.kt)
+
 
 ## Algorithm Summary
 The algorithm works by placing a "room" object in an arbitrary position on a two-dimensional matrix. The algorithm then flips a coin on each door associated with the initial room object to determine whether it will open and attach the current room to another room in that direction. In the event another room is placed, the new room is instantiated with an open door connecting it to the previous room. Before the rest of the doors in the initial room are handled, the algorithm recursively calls itself on the new room, handling the new room's doors first. This process continues until there are no more opportunities for a room to instantiate off of an existing room. This can mean the path has reached the end of the map, that another room already exists in the desired pathing direction, or that the algorithm determined not to place a room in a given direction at all. 
