@@ -18,10 +18,9 @@ fun main(args: Array<String>) {
     print("Enter world length 'm' as an Int: ")
     val m = readLine()!!.toInt()
 
+    // Generate and report the world map.
     println("Generating Dungeon!")
-
     val worldMap = generateDungeon(n, m)
-
     printMap(worldMap)
 }
 
