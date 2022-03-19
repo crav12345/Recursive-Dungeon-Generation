@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
 
 /** Prints values of a provided matrix of Room objects */
 private fun printMap(worldMap: Array<Array<Room>>) {
-    for (i in 0 until worldMap.size) {
+    for (i in worldMap.indices) {
         for (j in 0 until worldMap[0].size) {
             if (worldMap[i][j].exists) {
                 var doorCounter = 0
@@ -35,14 +35,12 @@ private fun printMap(worldMap: Array<Array<Room>>) {
                     }
                 }
 
-                if (doorCounter == 1)
-                    print(TEXT_GREEN + "X")
-                else if (doorCounter == 2)
-                    print(TEXT_CYAN + "X")
-                else if (doorCounter == 3)
-                    print(TEXT_YELLOW + "X")
-                else
-                    print(TEXT_PURPLE + "X")
+                when (doorCounter) {
+                    1 -> print(TEXT_GREEN + "X")
+                    2 -> print(TEXT_CYAN + "X")
+                    3 -> print(TEXT_YELLOW + "X")
+                    else -> print(TEXT_PURPLE + "X")
+                }
             }
             else {
                 print(TEXT_RED + "0")
@@ -79,6 +77,13 @@ private fun generateDungeon(n: Int, m: Int): Array<Array<Room>> {
 
 /** Recursively snakes paths out of the walls of a room */
 private fun pathify(currentRoom: Room, worldMap: Array<Array<Room>>) {
+    // Used to identify location of next placed room.
+    var xNext: Int
+    var yNext: Int
+
+    // Used to construct doors array of new rooms.
+    var newDoors: Array<Boolean>
+
     // Iterate through every door in the room.
     for (i in 0 until currentRoom.doors.size) {
         // Check if this door can be opened.
@@ -88,93 +93,50 @@ private fun pathify(currentRoom: Room, worldMap: Array<Array<Room>>) {
                 // Open the door.
                 currentRoom.doors[i].isOpen = true
 
-                // Place a room down if one doesn't already exist.
-                if (i == 0) {
-                    val nextPosition = worldMap[currentRoom.coordinates[1] - 1][currentRoom.coordinates[0]]
-                    if (!nextPosition.exists) {
-                        val newRoom = Room(
-                            arrayOf(
-                                Door(false, 0),
-                                Door(false, 1),
-                                Door(true, 2),
-                                Door(false, 3)
-                            ),
-                            arrayOf(
-                                currentRoom.coordinates[0],
-                                currentRoom.coordinates[1] - 1
-                            ),
-                            true
-                        )
-                        worldMap[currentRoom.coordinates[1] - 1][currentRoom.coordinates[0]] = newRoom
-
-                        // Recursive pathify() call on the new room.
-                        pathify(newRoom, worldMap)
+                // Locate next position and open a door in that room.
+                when (i) {
+                    0 -> {
+                        xNext = currentRoom.coordinates[0]
+                        yNext = currentRoom.coordinates[1] - 1
+                        newDoors = arrayOf(false, false, true, false)
                     }
-                } else if (i == 1) {
-                    val nextPosition = worldMap[currentRoom.coordinates[1]][currentRoom.coordinates[0] + 1]
-                    if (!nextPosition.exists) {
-                        val newRoom = Room(
-                            arrayOf(
-                                Door(false, 0),
-                                Door(false, 1),
-                                Door(false, 2),
-                                Door(true, 3)
-                            ),
-                            arrayOf(
-                                currentRoom.coordinates[0] + 1,
-                                currentRoom.coordinates[1]
-                            ),
-                            true
-                        )
-                        worldMap[currentRoom.coordinates[1]][currentRoom.coordinates[0] + 1] = newRoom
-
-                        // Recursive pathify() call on the new room.
-                        pathify(newRoom, worldMap)
+                    1 -> {
+                        xNext = currentRoom.coordinates[0] + 1
+                        yNext = currentRoom.coordinates[1]
+                        newDoors = arrayOf(false, false, false, true)
+                    }
+                    2 -> {
+                        xNext = currentRoom.coordinates[0]
+                        yNext = currentRoom.coordinates[1] + 1
+                        newDoors = arrayOf(true, false, false, false)
+                    }
+                    else -> {
+                        xNext = currentRoom.coordinates[0] - 1
+                        yNext = currentRoom.coordinates[1]
+                        newDoors = arrayOf(false, true, false, false)
                     }
                 }
-                else if (i == 2) {
-                    val nextPosition = worldMap[currentRoom.coordinates[1] + 1][currentRoom.coordinates[0]]
-                    if (!nextPosition.exists) {
-                        val newRoom = Room(
-                            arrayOf(
-                                Door(true, 0),
-                                Door(false, 1),
-                                Door(false, 2),
-                                Door(false, 3)
-                            ),
-                            arrayOf(
-                                currentRoom.coordinates[0],
-                                currentRoom.coordinates[1] + 1
-                            ),
-                            true
-                        )
-                        worldMap[currentRoom.coordinates[1] + 1][currentRoom.coordinates[0]] = newRoom
 
-                        // Recursive pathify() call on the new room.
-                        pathify(newRoom, worldMap)
-                    }
-                }
-                else {
-                    val nextPosition = worldMap[currentRoom.coordinates[1]][currentRoom.coordinates[0] - 1]
-                    if (!nextPosition.exists) {
-                        val newRoom = Room(
-                            arrayOf(
-                                Door(false, 0),
-                                Door(true, 1),
-                                Door(false, 2),
-                                Door(false, 3)
-                            ),
-                            arrayOf(
-                                currentRoom.coordinates[0] - 1,
-                                currentRoom.coordinates[1]
-                            ),
-                            true
-                        )
-                        worldMap[currentRoom.coordinates[1]][currentRoom.coordinates[0] - 1] = newRoom
+                // Place a room down if one doesn't already exist in next spot.
+                val nextPosition = worldMap[yNext][xNext]
+                if (!nextPosition.exists){
+                    val newRoom = Room(
+                        arrayOf(
+                            Door(newDoors[0], 0),
+                            Door(newDoors[1], 1),
+                            Door(newDoors[2], 2),
+                            Door(newDoors[3], 3),
+                        ),
+                        arrayOf(
+                            xNext,
+                            yNext
+                        ),
+                        true
+                    )
+                    worldMap[yNext][xNext] = newRoom
 
-                        // Recursive pathify() call on the new room.
-                        pathify(newRoom, worldMap)
-                    }
+                    // Recursive pathify call on newly placed room.
+                    pathify(newRoom, worldMap)
                 }
             }
         }
