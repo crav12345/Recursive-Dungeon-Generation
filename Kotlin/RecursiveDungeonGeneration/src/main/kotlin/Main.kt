@@ -1,9 +1,11 @@
+// Constants for color-coded output
 const val TEXT_RED = "\u001B[31m"
 const val TEXT_GREEN = "\u001B[32m"
 const val TEXT_YELLOW = "\u001B[33m"
 const val TEXT_PURPLE = "\u001B[35m"
 const val TEXT_CYAN = "\u001B[36m"
 
+/** Utilizes my recursive procedural generation algorithm to make a dungeon */
 fun main(args: Array<String>) {
     // Program arguments at Run/Debug configuration
     println("Program arguments: ${args.joinToString()}")
@@ -35,6 +37,8 @@ private fun printMap(worldMap: Array<Array<Room>>) {
                     }
                 }
 
+                // Print an 'X' for each room. Color differs for number of open
+                // doors.
                 when (doorCounter) {
                     1 -> print(TEXT_GREEN + "X")
                     2 -> print(TEXT_CYAN + "X")
@@ -81,7 +85,7 @@ private fun pathify(currentRoom: Room, worldMap: Array<Array<Room>>) {
     var xNext: Int
     var yNext: Int
 
-    // Used to construct doors array of new rooms.
+    // Used to construct doors array for new rooms.
     var newDoors: Array<Boolean>
 
     // Iterate through every door in the room.
@@ -93,7 +97,7 @@ private fun pathify(currentRoom: Room, worldMap: Array<Array<Room>>) {
                 // Open the door.
                 currentRoom.doors[i].isOpen = true
 
-                // Locate next position and open a door in that room.
+                // Locate next position and prepare to open a door there.
                 when (i) {
                     0 -> {
                         xNext = currentRoom.coordinates[0]
@@ -117,7 +121,8 @@ private fun pathify(currentRoom: Room, worldMap: Array<Array<Room>>) {
                     }
                 }
 
-                // Place a room down if one doesn't already exist in next spot.
+                // If there is NOT already a room in the adjacent spot, place
+                // one now.
                 val nextPosition = worldMap[yNext][xNext]
                 if (!nextPosition.exists){
                     val newRoom = Room(
