@@ -39,14 +39,14 @@ private fun printMap(worldMap: Array<Array<Room>>) {
                 // Print an 'X' for each room. Color differs for number of open
                 // doors.
                 when (doorCounter) {
-                    1 -> print(TEXT_GREEN + "X")
-                    2 -> print(TEXT_CYAN + "X")
+                    1 -> print(TEXT_PURPLE + "X")
+                    2 -> print(TEXT_RED + "X")
                     3 -> print(TEXT_YELLOW + "X")
-                    else -> print(TEXT_PURPLE + "X")
+                    else -> print(TEXT_GREEN + "X")
                 }
             }
             else {
-                print(TEXT_RED + "0")
+                print(TEXT_CYAN + "0")
             }
         }
         println()
