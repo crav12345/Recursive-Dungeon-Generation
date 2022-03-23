@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RecursiveDungeonGeneration</title>
+
+    <!-- Recursive Dungeon Generation -->
+    <script language="javascript" type="text/javascript" src="./dungeon.js"></script>
+    <script language="javascript" type="text/javascript" src="./Room.js"></script>
+    <script language="javascript" type="text/javascript" src="./Door.js"></script>
+  </head>
+  <body>
+    <h2>Recursive Dungeon Generation</h2>
+
+    <form onsubmit=
+      "printDungeon(document.getElementById('n').value,document.getElementById('m').value)"
+    >
+      <label for="n">N:</label><br>
+      <input type="text" id="n" name="n" value="10"><br>
+      <label for="m">M:</label><br>
+      <input type="text" id="m" name="m" value="10"><br>
+      <input type="submit" value="Submit">
+    </form>
+
+    <p>Click "Submit" to generate dungeon.</p>
+
+    <div id="worldMap">
+    </div>
+  </body>
+</html>
