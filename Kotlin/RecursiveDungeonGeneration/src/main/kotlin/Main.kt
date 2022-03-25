@@ -55,8 +55,19 @@ private fun printMap(worldMap: Array<Array<Room>>) {
 
 /** Procedurally builds a game world with room objects on a 2D array */
 private fun generateDungeon(n: Int, m: Int): Array<Array<Room>> {
+    // Vars used to initialize worldMap and make sure n and m are non-zero.
+    var worldN = n
+    var worldM = m
+
+    // Safety check to make sure n and m are non-zero.
+    if (n < 1)
+        worldN = 1
+    if (m < 1) {
+        worldM = 1
+    }
+
     // Initialize our worldMap as a 2D array of Rooms.
-    val worldMap = Array(n) { Array(m) {Room()}}
+    val worldMap = Array(worldN) { Array(worldM) {Room()}}
 
     // Place dungeon origin. In this case, it's at the center of the world.
     val origin = Room(

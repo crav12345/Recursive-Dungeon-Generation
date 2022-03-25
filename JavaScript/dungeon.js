@@ -51,7 +51,16 @@ function generateDungeon(n, m) {
   // Prevent page from refreshing.
   event.preventDefault()
 
-  // Create worldMap matrix.
+  // Safety check to make sure n and m are non-zero.
+  if (n < 1) {
+    n = 1
+  }
+  if (m < 1) {
+    m = 1
+  }
+
+  // Create worldMap matrix. Arrays in JS are dynamic, so setting length with n
+  // and m is not best practice.
   let worldMap = new Array()
   for (let i = 0; i < n; i++) {
     worldMap[i] = new Array()
@@ -91,8 +100,6 @@ function generateDungeon(n, m) {
    for (let i = 0; i < currentRoom.doors.length; i++) {
      // Check if this door can be opened.
      if (currentRoom.doors[i].canOpen(currentRoom, n, m)) {
-       console.log(currentRoom.coordinates.toString())
-       console.log(i)
        // Flip a coin to see whether to open a door.
        if (Math.floor(Math.random() * 2) == 1) {
          // Open the door.
