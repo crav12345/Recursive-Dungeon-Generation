@@ -4,7 +4,7 @@ class Door {
     this.direction = direction
   }
 
-  canOpen(parentRoom, worldMap) {
+  canOpen(parentRoom, n, m) {
     let canOpen = true
 
     // Can't open an already open door.
@@ -19,12 +19,12 @@ class Door {
         }
       }
       else if (this.direction == 1) {
-        if (parentRoom.coordinates[0] < worldMap[0].length - 2) {
+        if (parentRoom.coordinates[0] > m - 2) {
           canOpen = false
         }
       }
       else if (this.direction == 2) {
-        if (parentRoom.coordinates[1] > worldMap.length - 2) {
+        if (parentRoom.coordinates[1] > n - 2) {
           canOpen = false
         }
       }

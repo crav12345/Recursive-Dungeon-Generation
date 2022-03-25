@@ -17,10 +17,10 @@ function printDungeon(n, m) {
     let string = ""
     for (let j = 0; j < worldMap[i].length; j++) {
       if (worldMap[i][j]) {
-        string += "X "
+        string += "1"
       }
       else {
-        string += "0 "
+        string += "0"
       }
     }
     let text = document.createTextNode(string)
@@ -48,27 +48,35 @@ function removeAllChildNodes(parent) {
  * @param {number} m - the length of the map
  */
 function generateDungeon(n, m) {
+  // Prevent page from refreshing.
   event.preventDefault()
 
-  // Initialize worldMap matrix.
-  let worldMap = new Array(n)
+  // Create worldMap matrix.
+  let worldMap = new Array()
   for (let i = 0; i < n; i++) {
-    worldMap[i] = new Array(m)
-    worldMap[i].fill(undefined)
+    worldMap[i] = new Array()
+    for (let j = 0; j < m; j++) {
+      worldMap[i][j] = undefined
+    }
   }
 
   // Set our origin.
   let origin = new Room(
-    [new Door(), new Door(), new Door(), new Door()],
-    [Math.floor(n/2), Math.floor(m/2)],
+    [
+      new Door(false, 0),
+      new Door(false, 1),
+      new Door(false, 2),
+      new Door(false, 3)
+    ],
+    [Math.floor(m/2), Math.floor(n/2)],
     true
   )
   worldMap[origin.coordinates[1]][origin.coordinates[0]] = origin
 
   // Recursively map paths out of the origin.
-  pathify(origin, worldMap)
+  pathify(origin, worldMap, n, m)
 
-  // Send our new map back to index.html.
+  // Send our new map back.
   return worldMap
 }
 
@@ -78,11 +86,13 @@ function generateDungeon(n, m) {
  * @param {Room} currentRoom - room having paths added to it
  * @param {Array} worldMap - matrix representing the dungeon
  */
- function pathify(currentRoom, worldMap) {
+ function pathify(currentRoom, worldMap, n, m) {
    // Iterate through every door in the room.
    for (let i = 0; i < currentRoom.doors.length; i++) {
      // Check if this door can be opened.
-     if (currentRoom.doors[i].canOpen(currentRoom, worldMap)) {
+     if (currentRoom.doors[i].canOpen(currentRoom, n, m)) {
+       console.log(currentRoom.coordinates.toString())
+       console.log(i)
        // Flip a coin to see whether to open a door.
        if (Math.floor(Math.random() * 2) == 1) {
          // Open the door.
@@ -92,20 +102,20 @@ function generateDungeon(n, m) {
          if (i == 0) {
            var xNext = currentRoom.coordinates[0]
            var yNext = currentRoom.coordinates[1] - 1
-           var newDoors = [false, false, false, false]
+           var newDoors = [false, false, true, false]
          } else if (i == 1) {
            var xNext = currentRoom.coordinates[0] + 1
            var yNext = currentRoom.coordinates[1]
-           var newDoors = [false, false, false, false]
+           var newDoors = [false, false, false, true]
          } else if (i == 2) {
            var xNext = currentRoom.coordinates[0]
            var yNext = currentRoom.coordinates[1] + 1
-           var newDoors = [false, false, false, false]
+           var newDoors = [true, false, false, false]
          }
          else {
            var xNext = currentRoom.coordinates[0] - 1
            var yNext = currentRoom.coordinates[1]
-           var newDoors = [false, false, false, false]
+           var newDoors = [false, true, false, false]
          }
 
          // If there is NOT already a room in the adjacent spot, place one now.
@@ -124,7 +134,7 @@ function generateDungeon(n, m) {
            worldMap[yNext][xNext] = newRoom
 
            // Recursive pathify call on newly placed room.
-           pathify(newRoom, worldMap)
+           pathify(newRoom, worldMap, n, m)
          }
        }
      }
