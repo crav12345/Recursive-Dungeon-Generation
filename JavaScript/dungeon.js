@@ -14,17 +14,39 @@ function printDungeon(n, m) {
 
   for (let i = 0; i < worldMap.length; i++) {
     let tag = document.createElement("p")
-    let string = ""
+
     for (let j = 0; j < worldMap[i].length; j++) {
+      let container = document.createElement("span")
+      let string = ""
+
       if (worldMap[i][j]) {
-        string += "1"
+        let doorCounter = 0
+        string = "X"
+
+        for (let d = 0; d < worldMap[i][j].doors.length; d++) {
+          if (worldMap[i][j].doors[d].isOpen) {
+            doorCounter++
+          }
+        }
+
+        if (doorCounter == 1) {
+          container.style.color = "red"
+        } else if (doorCounter == 2) {
+          container.style.color = "orange"
+        } else if (doorCounter == 3) {
+          container.style.color = "green"
+        } else {
+          container.style.color = "pink"
+        }
       }
       else {
-        string += "0"
+        string = "O"
+        container.style.color = "blue"
       }
+      let text = document.createTextNode(string)
+      container.appendChild(text);
+      tag.appendChild(container)
     }
-    let text = document.createTextNode(string)
-    tag.appendChild(text)
     parent.appendChild(tag)
   }
 }
