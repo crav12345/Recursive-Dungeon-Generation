@@ -1,5 +1,5 @@
 # Recursive-Dungeon-Generation
-This repository contains implementations of a recursive algorithm, authored by Christopher Ravosa, for generating dungeons on a matrix. The general idea with this algorithm is that a dungeon is created by snaking paths out of a starting room known as the "origin" of the dungeon. For a more detailed overview of the algorithm, see the below sections.
+This repository contains implementations of a recursive algorithm, authored by Christopher Ravosa, for generating dungeons on a matrix. The general idea with this algorithm is that a dungeon is created by snaking paths out of a starting room known as the "origin" of the dungeon. Check back in the future to see implementations of this algorithm in different languages and with different modifications. For a more detailed overview of the algorithm, see the below sections.
 
 ### Table of Contents
 **[Quick Links to Implementations](#quick-links-to-implementations)**<br>
@@ -18,9 +18,7 @@ The algorithm works by placing a "room" object in an arbitrary position on a two
 
 In all cases, the coin flip occurs prior to a room being placed or a connection being established between a new room and a pre-existing room. This means that simply because two rooms are adjacent to each other, does not mean they will always connect. This creates a maze-like structure and ensures that all rooms are reachable from the initial room placement known as the "origin".
 
-There are many modifications which can be made to this algorithm. For example, the algorithm can be modified to work on a three-dimensional array of rooms with six doors. The fifth and sixth doors would exist on the floor and ceiling, effectively creating the potential for stairwells to exist. This modification allows seperate floors to exist in the dungeon. Other modifications include requirements regarding a minimum number of rooms or how frequently a room can be instantiated in a specific direction.
-
-The documentation of this repository, however, will exclusively discuss dungeon generation using this algorithm on a two-dimensional matrix. Check back in the future to see implementations of this algorithm in different languages and with different modifications.
+There are many modifications which can be made to this algorithm. For example, the algorithm can be modified to work on a three-dimensional array of rooms with six doors. The fifth and sixth doors would exist on the floor and ceiling, effectively creating the potential for stairwells to exist. This modification allows seperate floors to exist in the dungeon. Other modifications include requirements regarding a minimum number of rooms or how frequently a room can be instantiated in a specific direction. The documentation of this repository, however, will exclusively discuss dungeon generation using this algorithm on a two-dimensional matrix.
 
 ## Visualized Example
 <p align="center">
