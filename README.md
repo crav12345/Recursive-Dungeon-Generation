@@ -9,8 +9,9 @@ This repository contains implementations of a recursive algorithm, authored by C
 **[Acknowledgements](#acknowledgements)**<br>
 
 ## Quick Links to Implementations
-* [Kotlin](https://github.com/crav12345/Recursive-Dungeon-Generation/tree/main/Kotlin/RecursiveDungeonGeneration/src/main/kotlin)
 * [JavaScript](https://github.com/crav12345/Recursive-Dungeon-Generation/tree/main/JavaScript)
+* [Kotlin](https://github.com/crav12345/Recursive-Dungeon-Generation/tree/main/Kotlin/RecursiveDungeonGeneration/src/main/kotlin)
+* [Python](https://github.com/crav12345/Recursive-Dungeon-Generation/tree/main/Python)
 
 
 ## Algorithm Summary
