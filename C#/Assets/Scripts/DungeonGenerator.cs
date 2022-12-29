@@ -27,7 +27,20 @@ public class DungeonGenerator : MonoBehaviour
         Room[,] worldMap = new Room[n, m];
 
         // Instantiate origin room.
-        Room origin = new Room(new Door[] { new Door(false, 'N'), new Door(false, 'E'), new Door(false, 'S'), new Door(false, 'W') }, new int[] { (int)Mathf.Floor(m / 2), (int)Mathf.Floor(n / 2) });
+        Room origin = new Room(
+            new Door[] 
+            { 
+                new Door(false, 'N'),
+                new Door(false, 'E'),
+                new Door(false, 'S'),
+                new Door(false, 'W')
+            },
+            new int[]
+            {
+                (int)Mathf.Floor(m / 2),
+                (int)Mathf.Floor(n / 2)
+            }
+        );
 
         // Place origin. In this case, we want it at the center of the map.
         worldMap[origin.coordinates[1], origin.coordinates[0]] = origin;
